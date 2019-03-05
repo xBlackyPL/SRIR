@@ -84,7 +84,7 @@ Aplikacje?
 ---
 
 ### Warstowy model klastra:
-![cluster](docs/26.02.2019/cluster_model.png "Warstowy model clustra")
+![cluster](/cluster_model.png "Warstowy model clustra")
 
 ---
 
