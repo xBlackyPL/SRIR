@@ -1,1 +1,1 @@
-# SRIR 
+# Systemy Równoległe i Rozproszone 
