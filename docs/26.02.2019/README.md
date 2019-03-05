@@ -55,3 +55,92 @@ Przedstawione modele mogą również być mieszane.
 Klasyfikacje dalsze:
 * Multiprocessors _(Shared Memory)_
 * Multicomputers _(Private Memory)_
+
+
+
+| Zalety                                                      	| Wady                                                                                   	|
+|-------------------------------------------------------------	|----------------------------------------------------------------------------------------	|
+| Wysoka moc obliczeniowa i przepustowość                     	| Ograniczona ilość oprogramowania (szczególnie komercyjnego)                            	|
+| Niezawodność                                                	| Wydajność sieci ma kolosalny wpływ na wydajność systemu  (w niektórych zastosowaniach) 	|
+| Odporność na awarie                                         	| Problemy z bezpieczeństwem (zwiększenie bezpieczeństwa powoduje spadek wydajności)     	|
+| Wysoki stosunek jakość/cena                                 	|                                                                                        	|
+| Możliwość łatwej rozbudowy                                  	|                                                                                        	|
+| Możliwość łatwego przekraczania ograniczeń technologicznych 	|                                                                                        	|
+| Łatwość zastosowania w wielu problemach obliczeniowych      	|                                                                                        	|
+
+---
+
+###### Jak zbudować tani superkomputer?
+Wydajność?
+Sprzęt?
+Systemy operacyjne?
+Middleware? ► coś pomiędzy systemem, a aplikacją
+Aplikacje?
+
+---
+
+### Warstowy model klastra:
+![cluster][cluster_model]
+[cluster_model]: docs/26.02.2019/cluster_model.png
+
+---
+
+### Wydajność
+Szacuje się że superkomputery przeciętnie wykorzystują tylko 10% szczytowej mocy obliczeniowej.
+Główne przyczyny utraty mocy obliczeniowej:
+* Problem, których chcemy rozwiązać,
+* Algorytm, którego używamy,
+* Wykorzystywany język oraz kompilator,
+* System operacyjny,
+* Hardware.
+
+
+###### Etapy pracy nad przyrostem wydajności:
+* Porównanie nowych rozwiązań z istniejącymi,
+* Dopasowanie algorytmów do architektur i odwrotnie,
+* Poprawa zastosowanych rozwiązań.
+
+---
+
+### Metryki wydajności:
+###### MIPS 
+million instruction per second
+
+###### FLOPS 
+floating operations per second
+
+---
+
+### CZAS WYKONANIA [s]
+###### Przyspiesznie:
+	Sp = T1/Tp
+
+Przyjmuje się wartości od 1 do p. (p- ilość komputerów)
+
+###### Efektywność:
+	Ep = Sp/P = T1/p*Tp
+
+###### Redundancja:
+	Rp = Op/O1 - wzrost ilości operacji
+
+###### Wykorzystanie:
+	Up = Op/p*Tp
+
+###### Jakość:
+	Qp = T1^3/p*Tp^2*Op
+
+
+---
+
+### Granice wydajności:
+	Granica optymistyczna - N
+		.
+		.
+		.
+	Sweet Spot
+		.
+		.
+		.
+	Granica pesymistyczna - Log2N
+
+### Prawo Amdahla
