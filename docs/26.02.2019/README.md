@@ -72,17 +72,20 @@ Klasyfikacje dalsze:
 
 ###### Jak zbudować tani superkomputer?
 Wydajność?
+
 Sprzęt?
+
 Systemy operacyjne?
+
 Middleware? ► coś pomiędzy systemem, a aplikacją
+
 Aplikacje?
 
 ---
 
 ### Warstowy model klastra:
 ![cluster][cluster_model]
-[cluster_model]: docs/26.02.2019/cluster_model.png
-
+[cluster_model]: docs/26.02.2019/cluster_model.png "Warstowy model clustra"
 ---
 
 ### Wydajność
