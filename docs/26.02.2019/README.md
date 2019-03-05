@@ -86,6 +86,7 @@ Aplikacje?
 ### Warstowy model klastra:
 ![cluster][cluster_model]
 [cluster_model]: docs/26.02.2019/cluster_model.png "Warstowy model clustra"
+
 ---
 
 ### Wydajność
