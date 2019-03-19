@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <iostream>
 #include <thread>
+#include <vector>
 
 namespace {
 void imageDescription(const std::string &name, int width, int height,
@@ -16,9 +17,14 @@ void lapaceMaskProcessingInfo() {
     std::cout << "Image processing - laplace Mask..." << std::endl << std::endl;
 }
 
-void laplaceMask(gray **sourceImage, gray **outputImage, int width, int heigth) {
+void laplaceMask(gray **sourceImage, gray **outputImage, int width, int heigth,
+                 int index, int np) {
     // lapaceMaskProcessingInfo();
-    for (int i = 1; i < heigth - 1; ++i) {
+    int start = index > 0 ? heigth * index : heigth * index + 1;
+    int stop =
+        index < np - 1 ? heigth * (index + 1) + 1 : (heigth * (index + 1));
+
+    for (int i = start; i < stop - 1; ++i) {
         for (int j = 1; j < width - 1; ++j) {
             outputImage[i][j] = static_cast<float>(sourceImage[i - 1][j] +
                                                    sourceImage[i + 1][j] +
@@ -37,6 +43,7 @@ int main(int argc, char **argv) {
     const std::string inputImageFilePath = "foto01.pgm";
     const std::string outputImageFilePath = "output.pgm";
     FILE *sourceFileHandler = fopen(inputImageFilePath.c_str(), "r");
+    const int processes = 32;
 
     int columns = 0;
     int rows = 0;
@@ -47,8 +54,21 @@ int main(int argc, char **argv) {
     // imageDescription(inputImageFilePath, columns, rows, maxValues);
 
     gray **outputImage = pgm_allocarray(columns, rows);
+
+    std::vector<std::thread> threadPool;
+
     auto start = std::chrono::system_clock::now();
-    laplaceMask(inputImage, outputImage, columns, rows);
+    for (int i = 0; i < processes; ++i) {
+        threadPool.emplace_back(std::thread([=]() {
+            laplaceMask(inputImage, outputImage, columns, rows / processes, i,
+                        processes);
+        }));
+    }
+
+    for (auto &&thread : threadPool) {
+        thread.join();
+    }
+
     auto stop = std::chrono::system_clock::now();
     std::chrono::duration<double> timeElapsed = stop - start;
     std::cout << timeElapsed.count() << std::endl;
