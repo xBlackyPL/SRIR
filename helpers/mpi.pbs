@@ -1,0 +1,32 @@
+# MPI.PBS TEMPLATE CONFIG
+# YOU MUST EDIT THIS PART
+# YOU SHOULD PUT THIS FILE INTO THE DIRECTORY WITH YOUR CODE
+
+#_PBS PARAMETERS
+
+#PBS -l nodes=1:ppn=4
+#PBS -q student 
+
+#PROGRAM PARAMETERS
+
+PROGRAM="./a.out"
+STDOUT=run.out
+STDERR=run.err
+
+#END OF EDITION
+
+# DO NOT TOUCH THIS PART
+
+export PROGRAM
+export STDOUT
+export STDERR
+
+# Change to the directory where the program is:
+cd $PBS_O_WORKDIR
+
+# find out which nodes PSB assigned to us
+cat $PBS_NODEFILE > $PBS_JOBID.machinefile
+
+# Submit the program:
+export NODES=`wc -l < $PBS_NODEFILE`
+mpirun -machinefile $PBS_JOBID.machinefile -np $NODES $PROGRAM 1>$STDOUT 2>$STDERR
